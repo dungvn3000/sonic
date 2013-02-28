@@ -2,11 +2,9 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser
+package com.github.sonic.parser
 
 import org.scalatest.FunSuite
-import org.jsoup.Jsoup
-import collection.JavaConversions._
 import selector.DefaultSelector
 
 /**

@@ -2,7 +2,7 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser.extractor.rule
+package com.github.sonic.parser.extractor.rule
 
 /**
  * The Class HttpProtocolRule.

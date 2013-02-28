@@ -5,6 +5,8 @@
 package com.github.sonic.parser.util
 
 import scala.util.control.Breaks._
+import com.github.sonic.parser.extractor.DefaultExtractor
+import com.github.sonic.parser.extractor.rule.WebDomainRule
 
 /**
  * The Class LinkUtil.

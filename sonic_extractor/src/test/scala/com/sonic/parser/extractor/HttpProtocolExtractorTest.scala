@@ -2,7 +2,7 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser.extractor
+package com.github.sonic.parser.extractor
 
 import org.scalatest.FunSuite
 import rule.{WebTitleRule, WebDomainRule, HttpProtocolRule}

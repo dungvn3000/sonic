@@ -2,7 +2,7 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser.util
+package com.github.sonic.parser.util
 
 import org.scalatest.FunSuite
 import LinkUtil._

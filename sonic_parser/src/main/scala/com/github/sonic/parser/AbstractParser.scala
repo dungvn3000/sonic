@@ -2,11 +2,12 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser
+package com.github.sonic.parser
 
 import collection.mutable.ListBuffer
 import org.jsoup.Jsoup
 import collection.JavaConversions._
+import selector.Selector
 
 /**
  * The Class AbstractParser.

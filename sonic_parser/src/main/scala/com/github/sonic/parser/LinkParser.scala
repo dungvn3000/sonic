@@ -2,9 +2,11 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser
+package com.github.sonic.parser
 
 import collection.mutable.ListBuffer
+import selector.DefaultSelector
+import util.LinkUtil
 
 /**
  * The Class LinkParser.
