@@ -64,7 +64,7 @@ object LinkUtil {
           }
         }
 
-        val firstPart = url.substring(0, commaIndex);
+        val firstPart = url.substring(0, commaIndex)
         var secondPart = ""
         if (separatorIndex > 0) secondPart = url.substring(commaIndex, separatorIndex)
         else return url //Because the url is already base url
