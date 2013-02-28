@@ -2,7 +2,7 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser.selector
+package com.github.sonic.parser.selector
 
 import collection.mutable.ListBuffer
 

@@ -2,11 +2,9 @@
  * Copyright (C) 2012 - 2013 Sonic Search Engine
  */
 
-package com.sonic.parser.util
+package com.github.sonic.parser.util
 
 import scala.util.control.Breaks._
-import com.sonic.parser.extractor.DefaultExtractor
-import com.sonic.parser.extractor.rule.WebDomainRule
 
 /**
  * The Class LinkUtil.

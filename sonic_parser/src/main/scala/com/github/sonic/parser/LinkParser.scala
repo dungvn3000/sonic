@@ -4,9 +4,7 @@
 
 package com.sonic.parser
 
-import selector.DefaultSelector
 import collection.mutable.ListBuffer
-import util.LinkUtil
 
 /**
  * The Class LinkParser.

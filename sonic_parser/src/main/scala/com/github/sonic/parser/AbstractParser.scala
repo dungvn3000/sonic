@@ -5,7 +5,6 @@
 package com.sonic.parser
 
 import collection.mutable.ListBuffer
-import selector.Selector
 import org.jsoup.Jsoup
 import collection.JavaConversions._
 
