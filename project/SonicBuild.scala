@@ -24,20 +24,19 @@ object SonicBuild extends Build {
   )
 
   lazy val sonicCore = Project("sonic_core", file("sonic_core"), settings = sharedSetting).settings(
-    libraryDependencies ++= coreDependencies
+    libraryDependencies ++= coreDependencies ++ testDependencies
   )
 
   lazy val sonicModel = Project("sonic_model", file("sonic_model"), settings = sharedSetting).settings(
-    libraryDependencies ++= coreDependencies
-  )
+  ).dependsOn(sonicCore)
 
   lazy val sonicParser = Project("sonic_parser", file("sonic_parser"), settings = sharedSetting).settings(
-    libraryDependencies ++= coreDependencies
-  )
+    libraryDependencies ++= parserDependencies ++ testDependencies
+  ).dependsOn(sonicExtractor)
 
   lazy val sonicExtractor = Project("sonic_extractor", file("sonic_extractor"), settings = sharedSetting).settings(
-    libraryDependencies ++= coreDependencies
-  )  
+    libraryDependencies ++= testDependencies
+  ).dependsOn(sonicModel)
 
   lazy val coreDependencies = Seq(
     "org.slf4j" % "slf4j-simple" % "1.6.6",
@@ -48,8 +47,16 @@ object SonicBuild extends Build {
     "org.apache.commons" % "commons-math3" % "3.0",
     "commons-validator" % "commons-validator" % "1.4.0" exclude("commons-beanutils", "commons-beanutils"),
     "commons-io" % "commons-io" % "2.4",
-    "org.scalaz" %% "scalaz-core" % "6.0.4",
-    "com.typesafe" % "config" % "1.0.0",
+    "org.scalaz" %% "scalaz-core" % "6.0.4"
+  )
+
+  lazy val testDependencies = Seq(
+    "junit" % "junit" % "4.10" % "test",
+    "org.expecty" % "expecty" % "0.9" % "test",
+    "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+  )
+
+  lazy val parserDependencies = Seq(
     "org.jsoup" % "jsoup" % "1.7.2"
   )
 }
