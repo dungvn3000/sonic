@@ -18,8 +18,8 @@ class WebUrlRule extends Rule {
 
   override val beforeExtractRule = List(
     (st: String) => {
-      if (st.indexOf(" ") < 0) st + " "
-      else st.trim
+      if (st.length > minimumLength && st.last != ' ') st + " "
+      else st
     }
   )
 }

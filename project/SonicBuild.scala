@@ -5,7 +5,7 @@ import Project._
 object SonicBuild extends Build {
 
   lazy val sharedSetting = defaultSettings ++ Seq(
-    version := "0.1-SNAPSHOT",
+    version := "0.0.1",
     organization := "com.github.sonic",
     scalaVersion := "2.10.0",
     scalacOptions += "-Yresolve-term-conflict:package",
@@ -44,10 +44,7 @@ object SonicBuild extends Build {
     "commons-collections" % "commons-collections" % "3.2.1",
     "commons-digester" % "commons-digester" % "2.1" exclude("commons-beanutils", "commons-beanutils"),
     "commons-lang" % "commons-lang" % "2.6",
-    "org.apache.commons" % "commons-math3" % "3.0",
-    "commons-validator" % "commons-validator" % "1.4.0" exclude("commons-beanutils", "commons-beanutils"),
-    "commons-io" % "commons-io" % "2.4",
-    "org.scalaz" %% "scalaz-core" % "6.0.4"
+    "commons-validator" % "commons-validator" % "1.4.0" exclude("commons-beanutils", "commons-beanutils")
   )
 
   lazy val testDependencies = Seq(

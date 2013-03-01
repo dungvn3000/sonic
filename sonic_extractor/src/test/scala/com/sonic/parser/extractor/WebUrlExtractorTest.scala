@@ -22,6 +22,8 @@ class WebUrlExtractorTest extends FunSuite {
   val url6 = "      sadsad://   sdasd://  sadsd://  "
   val url7 = "http://vnexpress.net"
   val url8 = "http://www.h2shop.vn/ipad/ipad-4/may-ipad-4/ chỗ này bán rẻ nhất nè con"
+  val url9 = "gai dep ne http://vnexpress.net/Files/Subject/3b/be/21/48/vu-duc-dam-0.jpg"
+  val url10 = "gai dep ne http://vnexpress.net/Files/Subject/3b/be/21/48/vu-duc-dam-0.jpg  sadsd https://www.google.com.vn/search?sourceid=chrome&ie=UTF-8&q=http+protocol dkm vcl vlbc"
 
   val webUrlExtractor = new DefaultExtractor(new WebUrlRule)
   val expect = new Expecty()
@@ -76,6 +78,21 @@ class WebUrlExtractorTest extends FunSuite {
     expect {
       webUrlExtractor.results.size == 1
       webUrlExtractor.results(0) == "http://www.h2shop.vn/ipad/ipad-4/may-ipad-4/"
+    }
+
+    webUrlExtractor.results.clear()
+    webUrlExtractor.extract(url9)
+    expect {
+      webUrlExtractor.results.size == 1
+      webUrlExtractor.results(0) == "http://vnexpress.net/Files/Subject/3b/be/21/48/vu-duc-dam-0.jpg"
+    }
+
+    webUrlExtractor.results.clear()
+    webUrlExtractor.extract(url10)
+    expect {
+      webUrlExtractor.results.size == 2
+      webUrlExtractor.results(0) == "http://vnexpress.net/Files/Subject/3b/be/21/48/vu-duc-dam-0.jpg"
+      webUrlExtractor.results(1) == "https://www.google.com.vn/search?sourceid=chrome&ie=UTF-8&q=http+protocol"
     }
 
   }
