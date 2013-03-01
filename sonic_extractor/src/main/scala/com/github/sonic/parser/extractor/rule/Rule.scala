@@ -14,11 +14,13 @@ package com.github.sonic.parser.extractor.rule
 
 trait Rule {
 
-  val sign: (String, String) = null
+  val sign: (String, String)
 
-  val dirtySigns: List[String] = null
+  val dirtySigns: List[String] = Nil
 
-  val mandatorySigns: List[String] = null
+  val mandatorySigns: List[String] = Nil
+
+  val keepSign = false
 
   val beforeExtractRule: List[String => String] = List(
     (st: String) => st.trim

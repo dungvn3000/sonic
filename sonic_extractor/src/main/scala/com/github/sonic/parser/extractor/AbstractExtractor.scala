@@ -71,7 +71,11 @@ abstract class AbstractExtractor extends Extractor {
         //Remove found result then find another one
         process = process.substring(0, beginIndex) + process.substring(endIndex
           + endWith.length, process.length)
-        results += result
+        if (rule.keepSign) {
+          results += beginWith + result + endWith
+        } else {
+          results += result
+        }
       }
     }
 
