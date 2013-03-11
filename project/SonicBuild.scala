@@ -14,13 +14,14 @@ object SonicBuild extends Build {
       "twitter4j" at "http://twitter4j.org/maven2",
       "clojars.org" at "http://clojars.org/repo",
       "thischwa-repro" at "http://maven-repo.thischwa.de/",
+      "Expecty Repository" at "https://raw.github.com/pniederw/expecty/master/m2repo/",
       "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository",
       Resolver.file("Local Repository", file(Path.userHome.absolutePath + "/.ivy2/local"))(Resolver.ivyStylePatterns)
     )
   )
 
   lazy val sonic = Project("sonic", file("."), settings = sharedSetting).aggregate(
-    sonicCore, sonicModel, sonicParser, sonicExtractor
+    sonicCore, sonicModel, sonicParser, sonicExtractor, linkerzParser
   )
 
   lazy val sonicCore = Project("sonic_core", file("sonic_core"), settings = sharedSetting).settings(
@@ -31,6 +32,10 @@ object SonicBuild extends Build {
   ).dependsOn(sonicCore)
 
   lazy val sonicParser = Project("sonic_parser", file("sonic_parser"), settings = sharedSetting).settings(
+    libraryDependencies ++= parserDependencies ++ testDependencies
+  ).dependsOn(sonicExtractor)
+
+  lazy val linkerzParser = Project("linkerz_parser", file("linkerz_parser"), settings = sharedSetting).settings(
     libraryDependencies ++= parserDependencies ++ testDependencies
   ).dependsOn(sonicExtractor)
 
