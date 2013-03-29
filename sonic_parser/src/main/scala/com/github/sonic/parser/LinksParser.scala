@@ -9,6 +9,7 @@ import collection.JavaConversions._
 import collection.JavaConverters._
 import java.net.URI
 import collection.mutable.ListBuffer
+import org.apache.http.client.utils.URIUtils
 
 /**
  * This class using for crawling.

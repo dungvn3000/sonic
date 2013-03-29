@@ -1,8 +1,9 @@
-package org.linkerz.parser
+package com.github.sonic.parser
 
 import org.scalatest.FunSuite
 import org.jsoup.Jsoup
-import util.FileUtil._
+import org.linkerz.parser.util.FileUtil._
+import org.linkerz.parser.ArticleParser
 
 /**
  * The Class TestContentSelectionParser.
