@@ -22,7 +22,7 @@ object SonicBuild extends Build {
   )
 
   lazy val sonic = Project("sonic", file("."), settings = sharedSetting).aggregate(
-    sonicCore, sonicModel, sonicParser, sonicExtractor, linkerzParser
+    sonicCore, sonicModel, sonicParser, sonicExtractor
   )
 
   lazy val sonicCore = Project("sonic_core", file("sonic_core"), settings = sharedSetting).settings(
@@ -33,10 +33,6 @@ object SonicBuild extends Build {
   ).dependsOn(sonicCore)
 
   lazy val sonicParser = Project("sonic_parser", file("sonic_parser"), settings = sharedSetting).settings(
-    libraryDependencies ++= parserDependencies ++ testDependencies
-  ).dependsOn(sonicExtractor)
-
-  lazy val linkerzParser = Project("linkerz_parser", file("linkerz_parser"), settings = sharedSetting).settings(
     libraryDependencies ++= parserDependencies ++ testDependencies
   ).dependsOn(sonicExtractor)
 
