@@ -1,4 +1,4 @@
-package org.linkerz.parser.model
+package com.github.sonic.parser.model
 
 import org.jsoup.nodes.Element
 

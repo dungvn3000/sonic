@@ -1,4 +1,4 @@
-package org.linkerz.parser.util
+package com.github.sonic.parser.util
 
 import breeze.text.tokenize.JavaWordTokenizer
 import io.Source

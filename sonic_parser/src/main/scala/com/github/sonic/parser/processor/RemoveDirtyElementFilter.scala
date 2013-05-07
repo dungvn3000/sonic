@@ -1,7 +1,7 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.Article
-import org.linkerz.parser.util.DirtyElementPattern
+import com.github.sonic.parser.model.Article
+import com.github.sonic.parser.util.DirtyElementPattern
 import collection.JavaConversions._
 
 /**

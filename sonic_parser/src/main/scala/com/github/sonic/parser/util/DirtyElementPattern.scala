@@ -1,4 +1,4 @@
-package org.linkerz.parser.util
+package com.github.sonic.parser.util
 
 import io.Source
 import java.util.regex.Pattern

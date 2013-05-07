@@ -1,10 +1,10 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.Article
+import com.github.sonic.parser.model.Article
 import org.apache.commons.lang.StringUtils
 import collection.mutable.ListBuffer
 import collection.JavaConversions._
-import org.linkerz.parser.util.{ArticleUtil, StopWordCounter}
+import com.github.sonic.parser.util.{ArticleUtil, StopWordCounter}
 
 /**
  * The Class TitleExtractor.

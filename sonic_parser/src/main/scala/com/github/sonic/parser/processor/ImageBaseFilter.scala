@@ -1,6 +1,6 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.{ArticleElement, ImageElement, Article}
+import com.github.sonic.parser.model.{ArticleElement, ImageElement, Article}
 
 /**
  * Thi class will mark an image what has the previous or next potential element is become potential.

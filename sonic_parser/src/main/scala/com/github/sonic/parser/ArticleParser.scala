@@ -1,4 +1,4 @@
-package org.linkerz.parser
+package com.github.sonic.parser
 
 import processor._
 import model.Article

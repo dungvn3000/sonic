@@ -1,4 +1,4 @@
-package org.linkerz.parser
+package com.github.sonic.parser
 
 import model.Link
 import org.jsoup.nodes.Document

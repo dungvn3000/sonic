@@ -1,13 +1,13 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
 import collection.mutable.ListBuffer
-import org.linkerz.parser.model._
+import com.github.sonic.parser.model._
 import collection.JavaConversions._
 import org.jsoup.nodes.Element
-import org.linkerz.parser.util.ArticleUtil._
-import org.linkerz.parser.model.LinkElement
-import org.linkerz.parser.model.Article
-import org.linkerz.parser.model.TextElement
+import com.github.sonic.parser.util.ArticleUtil._
+import com.github.sonic.parser.model.LinkElement
+import com.github.sonic.parser.model.Article
+import com.github.sonic.parser.model.TextElement
 import JsoupElementWrapper._
 
 /**

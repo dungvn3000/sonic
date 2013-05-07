@@ -3,8 +3,7 @@ package com.github.sonic.parser
 import org.scalatest.FunSuite
 import org.jsoup.Jsoup
 import org.expecty.Expecty
-import org.linkerz.parser.util.FileUtil._
-import org.linkerz.parser.LinksParser
+import com.github.sonic.parser.util.FileUtil._
 
 /**
  * The Class TestLinksParser.

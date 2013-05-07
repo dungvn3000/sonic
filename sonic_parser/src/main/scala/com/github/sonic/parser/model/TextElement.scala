@@ -1,10 +1,10 @@
-package org.linkerz.parser.model
+package com.github.sonic.parser.model
 
 import breeze.text.tokenize.JavaWordTokenizer
 import org.jsoup.nodes.Element
 import org.apache.commons.lang.StringUtils
 import JsoupElementWrapper._
-import org.linkerz.parser.util.StopWordCounter
+import com.github.sonic.parser.util.StopWordCounter
 
 /**
  * This class represent for a text block inside a html page.

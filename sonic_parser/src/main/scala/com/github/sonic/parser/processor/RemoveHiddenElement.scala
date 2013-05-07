@@ -1,7 +1,7 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.Article
-import org.linkerz.parser.model.JsoupElementWrapper._
+import com.github.sonic.parser.model.Article
+import com.github.sonic.parser.model.JsoupElementWrapper._
 import collection.JavaConversions._
 
 /**

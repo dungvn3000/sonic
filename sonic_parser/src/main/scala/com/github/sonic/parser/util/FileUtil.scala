@@ -1,4 +1,4 @@
-package org.linkerz.parser.util
+package com.github.sonic.parser.util
 
 /**
  * The Class FileUtil.

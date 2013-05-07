@@ -1,6 +1,6 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.{ArticleElement, Article}
+import com.github.sonic.parser.model.{ArticleElement, Article}
 import collection.mutable
 
 /**

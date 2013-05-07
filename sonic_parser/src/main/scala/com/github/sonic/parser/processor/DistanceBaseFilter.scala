@@ -1,6 +1,6 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.{ArticleElement, Article}
+import com.github.sonic.parser.model.{ArticleElement, Article}
 
 /**
  * This class base on distance of two potential element to find another potential element.

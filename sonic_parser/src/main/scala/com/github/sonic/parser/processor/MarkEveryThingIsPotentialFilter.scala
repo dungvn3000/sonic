@@ -1,6 +1,6 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.Article
+import com.github.sonic.parser.model.Article
 
 /**
  * The Class MarkEveryThingIsPotentialFilter.

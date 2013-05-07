@@ -1,7 +1,7 @@
-package org.linkerz.parser.processor
+package com.github.sonic.parser.processor
 
-import org.linkerz.parser.model.Article
-import org.linkerz.parser.util.DirtyImagePattern
+import com.github.sonic.parser.model.Article
+import com.github.sonic.parser.util.DirtyImagePattern
 
 /**
  * The Class ImageFilter.
