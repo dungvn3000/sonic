@@ -1,6 +1,8 @@
 package controllers
 
 import play.api.mvc.{Action, Controller}
+import org.jsoup.Jsoup
+import com.github.sonic.parser.ArticleParser
 
 /**
  * The Class Home.
@@ -12,7 +14,14 @@ import play.api.mvc.{Action, Controller}
 object Home extends Controller {
 
   def index = Action {
-    Ok("Hello World")
+    Ok(views.html.home())
+  }
+
+  def parse(url: String) = Action {
+    val doc = Jsoup.connect(url).get
+    val parser = new ArticleParser
+    val article = parser.parse(doc)
+    Ok(views.html.home(Some(doc.html()), Some(article.text)))
   }
 
 }
