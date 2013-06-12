@@ -6,3 +6,5 @@ resolvers += Resolver.url(
 )(Resolver.ivyStylePatterns)
 
 addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.4.0")
+
+addSbtPlugin("play" % "sbt-plugin" % "2.1.1")

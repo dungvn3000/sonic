@@ -1,13 +1,18 @@
 import sbt._
 import Keys._
-import Project._
+import sbt.Project._
 
 object SonicBuild extends Build {
 
-  lazy val sharedSetting = defaultSettings ++ Seq(
-    version := "0.0.1",
-    organization := "com.github.sonic",
-    scalaVersion := "2.10.0",
+  val appOrganization = "com.github"
+  val appName = "sonic"
+  val appVersion = "0.0.1"
+  val appScalaVersion = "2.10.0"
+
+  lazy val sharedSetting = Project.defaultSettings ++ Seq(
+    version := appVersion,
+    organization := appOrganization,
+    scalaVersion := appScalaVersion,
     resolvers ++= Seq(
       "Typesafe Repository" at "http://repo.akka.io/releases/",
       "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
@@ -17,8 +22,8 @@ object SonicBuild extends Build {
     )
   )
 
-  lazy val sonic = Project("sonic", file("."), settings = sharedSetting).aggregate(
-    sonicCore, sonicModel, sonicParser, sonicExtractor
+  lazy val sonic = Project(appName, file("."), settings = sharedSetting).aggregate(
+    sonicCore, sonicModel, sonicParser, sonicExtractor, sonicWeb
   )
 
   lazy val sonicCore = Project("sonic_core", file("sonic_core"), settings = sharedSetting).settings(
@@ -35,6 +40,8 @@ object SonicBuild extends Build {
   lazy val sonicExtractor = Project("sonic_extractor", file("sonic_extractor"), settings = sharedSetting).settings(
     libraryDependencies ++= testDependencies
   ).dependsOn(sonicModel)
+
+  lazy val sonicWeb = play.Project("sonic_web", appVersion, path = file("sonic_web")).dependsOn(sonicExtractor)
 
   lazy val coreDependencies = Seq(
     "org.slf4j" % "slf4j-simple" % "1.6.6",
