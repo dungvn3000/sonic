@@ -1,4 +1,4 @@
-sonic
+Sonic
 =====
 
-the very fast parser and extractor
+a very fast article parser and extractor
