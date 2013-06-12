@@ -8,12 +8,8 @@ object SonicBuild extends Build {
     version := "0.0.1",
     organization := "com.github.sonic",
     scalaVersion := "2.10.0",
-    scalacOptions += "-Yresolve-term-conflict:package",
     resolvers ++= Seq(
       "Typesafe Repository" at "http://repo.akka.io/releases/",
-      "twitter4j" at "http://twitter4j.org/maven2",
-      "clojars.org" at "http://clojars.org/repo",
-      "thischwa-repro" at "http://maven-repo.thischwa.de/",
       "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
       "Expecty Repository" at "https://raw.github.com/pniederw/expecty/master/m2repo/",
       "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository",
@@ -58,6 +54,6 @@ object SonicBuild extends Build {
   lazy val parserDependencies = Seq(
     "org.jsoup" % "jsoup" % "1.7.2",
     "org.apache.httpcomponents" % "httpclient" % "4.2.2",
-    "org.scalanlp" %% "breeze-process" % "0.3-SNAPSHOT"
+    "org.scalanlp" %% "breeze-process" % "0.3"
   )
 }
