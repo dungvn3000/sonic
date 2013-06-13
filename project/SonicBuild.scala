@@ -61,6 +61,7 @@ object SonicBuild extends Build {
   )
 
   lazy val parserDependencies = Seq(
+    "net.sourceforge.nekohtml" % "nekohtml" % "1.9.18",
     "org.jsoup" % "jsoup" % "1.7.2",
     "org.apache.httpcomponents" % "httpclient" % "4.2.2",
     "org.scalanlp" %% "breeze-process" % "0.3"
