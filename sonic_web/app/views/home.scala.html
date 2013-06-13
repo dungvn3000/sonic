@@ -1,4 +1,3 @@
-@(html: Option[String] = None, text: Option[String] = None)
 @import partials._
 
 <!DOCTYPE html>
@@ -19,7 +18,6 @@
     <script src="/assets/js/lib/jquery.nicescroll.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/bootstrap.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/ace/ace.js" type="text/javascript"></script>
-
 </head>
 <body>
 
@@ -28,18 +26,18 @@
 </div>
 
 <div class="ui-layout-north">
-    <form class="form-inline" action="/parse" method="GET" style="padding-top: 50px;">
-        <input type="text" class="input-xlarge" name="url" placeholder="Url">
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <form class="form-inline" style="padding-top: 50px;">
+        <input id="url" type="text" class="input-xlarge" name="url" placeholder="Url">
+        <a id="parseBtn" class="btn btn-primary">Parse</a>
     </form>
 </div>
 
 <div class="ui-layout-west">
-    <div class="left-col" id="left-col">@html.getOrElse("")</div>
+    <div class="left-col" id="left-col"></div>
 </div>
 
 <div class="ui-layout-center">
-    <div class="right-col">@text.getOrElse("")</div>
+    <div class="right-col"></div>
 </div>
 
 </body>
@@ -56,6 +54,17 @@
         editor.setFontSize(14);
         editor.setTheme("ace/theme/chrome");
         editor.getSession().setMode("ace/mode/html");
+        $('#parseBtn').click(function () {
+            $.ajax({
+                dataType: "json",
+                url: '/parse',
+                data: {url: $('#url').val()},
+                success: function (data) {
+                    editor.setValue(data.html);
+                    $('.right-col').html(data.text);
+                }
+            })
+        });
     });
 </script>
 </html>

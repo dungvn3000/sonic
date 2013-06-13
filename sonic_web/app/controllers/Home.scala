@@ -3,6 +3,7 @@ package controllers
 import play.api.mvc.{Action, Controller}
 import org.jsoup.Jsoup
 import com.github.sonic.parser.ArticleParser
+import play.api.libs.json.Json
 
 /**
  * The Class Home.
@@ -21,7 +22,10 @@ object Home extends Controller {
     val doc = Jsoup.connect(url).get
     val parser = new ArticleParser
     val article = parser.parse(doc)
-    Ok(views.html.home(Some(doc.html()), Some(article.text)))
+    Ok(Json.obj(
+      "html" -> doc.html(),
+      "text" -> article.text
+    ))
   }
 
 }
