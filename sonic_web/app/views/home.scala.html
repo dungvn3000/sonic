@@ -18,6 +18,7 @@
     <script src="/assets/js/lib/jquery.layout-latest.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/jquery.nicescroll.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/js/lib/ace/ace.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -34,11 +35,11 @@
 </div>
 
 <div class="ui-layout-west">
-    @html.getOrElse("")
+    <div class="left-col" id="left-col">@html.getOrElse("")</div>
 </div>
 
 <div class="ui-layout-center">
-    @text.getOrElse("")
+    <div class="right-col">@text.getOrElse("")</div>
 </div>
 
 </body>
@@ -51,23 +52,10 @@
             north__resizable: false,
             west__size: '50%'
         });
-        var opt1 = {
-            autohidemode: false,
-            cursorfixedheight: 50,
-            cursoropacitymax: 0.5,
-            cursorborder: "0"
-        };
-
-        var opt2 = {
-            autohidemode: false,
-            cursorfixedheight: 50,
-            cursoropacitymax: 0.5,
-            cursorborder: "0"
-        };
-
-        $('.ui-layout-west').niceScroll(opt1);
-        $('.ui-layout-center').niceScroll(opt2);
+        var editor = ace.edit("left-col");
+        editor.setFontSize(14);
+        editor.setTheme("ace/theme/chrome");
+        editor.getSession().setMode("ace/mode/html");
     });
-
 </script>
 </html>

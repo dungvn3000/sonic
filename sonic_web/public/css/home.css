@@ -17,6 +17,9 @@ html, body, .container-fluid {
 
 .left-col, .right-col {
     height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px solid;
 }
 
 .nicescroll-rails {
