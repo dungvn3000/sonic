@@ -18,6 +18,7 @@
     <script src="/assets/js/lib/jquery.nicescroll.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/bootstrap.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/jquery.blockUI.js" type="text/javascript"></script>
+    <script src="/assets/js/lib/ace/ace.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -35,6 +36,7 @@
 <iframe class="ui-layout-west left-col" src="" frameborder="0" scrolling="auto"></iframe>
 
 <div class="ui-layout-center right-col">
+
 </div>
 
 </body>
@@ -48,6 +50,7 @@
             west__resizeWhileDragging: false,
             maskContents: true
         });
+
 
         $('#parseBtn').click(function () {
             $.blockUI({baseZ: 9999});
@@ -65,6 +68,7 @@
                 }
             })
         });
+
         $(document).ajaxStop($.unblockUI);
     });
 </script>

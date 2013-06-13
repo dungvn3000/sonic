@@ -52,7 +52,7 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
   def contentHtml = {
     val sb = new StringBuilder
     contentElements.foreach(element => {
-      sb.append(element.jsoupElement.outerHtml())
+      sb.append("<p>" + element.jsoupElement.outerHtml() + "</p>")
       sb.append("\n")
     })
     sb.toString()
