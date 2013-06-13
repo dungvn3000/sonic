@@ -18,6 +18,7 @@
     <script src="/assets/js/lib/jquery.nicescroll.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/bootstrap.min.js" type="text/javascript"></script>
     <script src="/assets/js/lib/ace/ace.js" type="text/javascript"></script>
+    <script src="/assets/js/lib/jquery.blockUI.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -55,16 +56,22 @@
         editor.setTheme("ace/theme/chrome");
         editor.getSession().setMode("ace/mode/html");
         $('#parseBtn').click(function () {
+            $.blockUI();
             $.ajax({
+                type: "POST",
                 dataType: "json",
-                url: '/parse',
+                url: '/parseUrl',
                 data: {url: $('#url').val()},
                 success: function (data) {
                     editor.setValue(data.html);
                     $('.right-col').html(data.text);
+                },
+                error: function() {
+                    alert("Somg thing go wrong");
                 }
             })
         });
+        $(document).ajaxStop($.unblockUI);
     });
 </script>
 </html>
