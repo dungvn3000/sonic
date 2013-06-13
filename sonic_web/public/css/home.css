@@ -16,10 +16,24 @@ html, body, .container-fluid {
 }
 
 .left-col, .right-col {
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
     border: 1px solid;
+    overflow:	auto;
+}
+
+iframe {
+    padding:	0 !important; /* iframes should not have padding */
+    overflow:	auto !important;
+}
+
+.ui-layout-mask {
+    background:	#C00 !important;
+    opacity:	.20 !important;
+    filter:		alpha(opacity=20) !important;
+}
+
+.ui-layout-resizer-west {
+    background: #cfcfcf;
+    border-right: 1px solid gray;
 }
 
 .nicescroll-rails {
