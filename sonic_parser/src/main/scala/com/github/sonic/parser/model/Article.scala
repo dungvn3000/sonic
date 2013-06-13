@@ -45,6 +45,15 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
     sb.toString()
   }
 
+  def contentHtml = {
+    val sb = new StringBuilder
+    contentElements.foreach(element => {
+      sb.append(element.jsoupElement.outerHtml())
+      sb.append("\n")
+    })
+    sb.toString()
+  }
+
   /**
    * The short description text for the article. Find the longest block and split it to a description.
    * @return
