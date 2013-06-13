@@ -41,7 +41,9 @@ object SonicBuild extends Build {
     libraryDependencies ++= testDependencies
   ).dependsOn(sonicModel)
 
-  lazy val sonicWeb = play.Project("sonic_web", appVersion, path = file("sonic_web")).dependsOn(sonicParser)
+  lazy val sonicWeb = play.Project("sonic_web", appVersion, dependencies = Seq(
+    "com.ning" % "async-http-client" % "1.7.16"
+  ), path = file("sonic_web")).dependsOn(sonicParser)
 
   lazy val coreDependencies = Seq(
     "org.slf4j" % "slf4j-simple" % "1.6.6",

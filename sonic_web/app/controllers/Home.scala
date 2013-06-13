@@ -6,6 +6,7 @@ import com.github.sonic.parser.ArticleParser
 import play.api.libs.json.Json
 import play.api.data.Form
 import play.api.data.Forms._
+import com.ning.http.client.AsyncHttpClient
 
 /**
  * The Class Home.
@@ -25,12 +26,14 @@ object Home extends Controller {
       Form("url" -> nonEmptyText).bindFromRequest.fold(
         error => NotFound,
         url => {
-          val doc = Jsoup.connect(url).get
+          val httpClient = new AsyncHttpClient
+          val response = httpClient.prepareGet(url).execute().get()
+          val doc = Jsoup.parse(response.getResponseBodyAsStream, null, url)
           val parser = new ArticleParser
           val article = parser.parse(doc)
           Ok(Json.obj(
             "html" -> doc.html(),
-            "text" -> article.text
+            "text" -> article.contentHtml
           ))
         }
       )
