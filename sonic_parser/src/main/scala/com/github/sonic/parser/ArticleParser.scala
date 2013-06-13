@@ -18,6 +18,7 @@ class ArticleParser {
     new DocumentCleaner,
     new LanguageDetector,
     new RemoveHiddenElement,
+    new RemoveDirtyElementFilter,
     //Step2: Extract article elements.
     new ArticleExtractor,
     new TitleExtractor,
@@ -33,7 +34,9 @@ class ArticleParser {
     //Step5: Only keep high score elements.
     new HighestScoreElementFilter,
     new ContainerElementDetector,
-    new ExpandTitleToContentFilter
+    new ExpandTitleToContentFilter,
+    //Step 6: Fixed broken link
+    new BrokenLinkFixed
   )
 
   /**

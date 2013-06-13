@@ -72,9 +72,15 @@
 .*/icon_googleplus.gif.*
 http://tuoitre.vn/Images/Trans.gif
 http://tuoitre.vn/Images/bookmark/.*
+hotline.gif
+mail.gif
 #Domain
 .*reddit.com.*
 .*facebook.com.*
 .*google.com.*
 .*twitter.com.*
 .*digg.com.*
+
+#VNExpress
+http://vnexpress.net/Images/boxcomment/orderlike_cmt.jpg
+http://vnexpress.net/images/boxcomment/xemthem_cmt.jpg

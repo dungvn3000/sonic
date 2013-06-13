@@ -2,6 +2,8 @@ package com.github.sonic.parser.model
 
 import org.jsoup.nodes.{Element, Document}
 import collection.JavaConverters._
+import org.apache.http.client.utils.URIUtils
+import java.net.URI
 
 /**
  * The Class Article.
@@ -11,6 +13,8 @@ import collection.JavaConverters._
  *
  */
 class Article(val doc: Document, private val _containerElement: Option[Element] = None) {
+
+  val baseUrl = URIUtils.extractHost(new URI(doc.baseUri())).toURI
 
   /**
    * Default is vi.

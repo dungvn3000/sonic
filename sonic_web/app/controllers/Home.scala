@@ -6,7 +6,7 @@ import com.github.sonic.parser.ArticleParser
 import play.api.libs.json.Json
 import play.api.data.Form
 import play.api.data.Forms._
-import com.ning.http.client.AsyncHttpClient
+import com.ning.http.client.{AsyncHttpClientConfig, AsyncHttpClient}
 
 /**
  * The Class Home.
@@ -17,6 +17,11 @@ import com.ning.http.client.AsyncHttpClient
  */
 object Home extends Controller {
 
+  lazy val config = new AsyncHttpClientConfig.Builder()
+    .setCompressionEnabled(true)
+    .setFollowRedirects(true)
+    .build()
+
   def index = Action {
     Ok(views.html.home())
   }
@@ -26,7 +31,7 @@ object Home extends Controller {
       Form("url" -> nonEmptyText).bindFromRequest.fold(
         error => NotFound,
         url => {
-          val httpClient = new AsyncHttpClient
+          val httpClient = new AsyncHttpClient(config)
           val response = httpClient.prepareGet(url).execute().get()
           val doc = Jsoup.parse(response.getResponseBodyAsStream, null, url)
           val parser = new ArticleParser

@@ -50,7 +50,7 @@
         });
 
         $('#parseBtn').click(function () {
-            $.blockUI();
+            $.blockUI({baseZ: 9999});
             $('.left-col').attr('src', $('#url').val());
             $.ajax({
                 type: "POST",

@@ -1,3 +1,4 @@
+#Class name or Id of element is not important
 .*related_library_content.*
 .*tags-on-articles.*
 comment
@@ -16,3 +17,4 @@ box_comment
 dzone-social-buttons
 authorMetaData
 print-link
+js-frame-loading-spinner
