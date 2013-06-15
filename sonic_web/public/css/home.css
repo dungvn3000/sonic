@@ -6,26 +6,27 @@ html, body, .container-fluid {
     padding-top: 50px;
 }
 
-.content {
-    height: 85%;
-}
-
 .left-col, .right-col {
     border: 1px solid #cfcfcf;
-    overflow:	auto;
+    overflow: auto;
     padding-bottom: 20px;
 }
 
 iframe {
-    padding:	0 !important; /* iframes should not have padding */
-    overflow:	auto !important;
+    padding: 0 !important; /* iframes should not have padding */
+    overflow: auto !important;
 }
 
 .ui-layout-mask {
-    opacity:	.20 !important;
-    filter:		alpha(opacity=20) !important;
+    opacity: .20 !important;
+    filter: alpha(opacity=20) !important;
 }
 
 .ui-layout-resizer-west {
     background: #cfcfcf;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    font-size: 14px !important;
+    line-height: 20px !important;
 }

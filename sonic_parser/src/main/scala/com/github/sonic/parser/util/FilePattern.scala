@@ -38,6 +38,6 @@ trait FilePattern {
 
   def matches(st: String) = pattern.matcher(st).matches()
 
-  def contains(st: String) = StringUtils.isNotBlank(st) && regex.contains(st)
+  def contains(st: String) = StringUtils.isNotBlank(st) && regex.contains(StringUtils.trim(st))
 
 }
