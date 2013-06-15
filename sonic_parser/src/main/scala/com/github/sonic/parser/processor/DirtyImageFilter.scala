@@ -12,11 +12,9 @@ import com.github.sonic.parser.util.DirtyImagePattern
  */
 class DirtyImageFilter extends Processor {
 
-  val dirtyImagePattern = new DirtyImagePattern
-
   def process(implicit article: Article) {
     article.mediaElements.foreach(element => {
-      if (dirtyImagePattern.matches(element.src)) {
+      if (DirtyImagePattern.matches(element.src)) {
         element.isPotential = false
       }
     })

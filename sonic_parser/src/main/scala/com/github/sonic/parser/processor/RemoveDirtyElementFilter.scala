@@ -1,7 +1,7 @@
 package com.github.sonic.parser.processor
 
 import com.github.sonic.parser.model.Article
-import com.github.sonic.parser.util.DirtyElementPattern
+import com.github.sonic.parser.util.{DirtyTextPattern, DirtyElementPattern}
 import collection.JavaConversions._
 
 /**
@@ -14,11 +14,9 @@ import collection.JavaConversions._
  */
 class RemoveDirtyElementFilter extends Processor {
 
-  val dirtyPattern = new DirtyElementPattern
-
   def process(implicit article: Article) {
     val removeElements = article.containerElement.getAllElements.filter(element => {
-      dirtyPattern.matches(element.className) || dirtyPattern.matches(element.id)
+      DirtyElementPattern.matches(element.className) || DirtyElementPattern.matches(element.id) || DirtyTextPattern.contains(element.ownText)
     })
 
     removeElements.foreach(_.remove())

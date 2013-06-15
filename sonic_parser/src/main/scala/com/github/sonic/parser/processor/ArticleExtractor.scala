@@ -19,7 +19,7 @@ class ArticleExtractor extends Processor {
     implicit val articleElements = new ListBuffer[ArticleElement]
     val elements = article.containerElement.getAllElements
 
-    elements.foreach(element => if (!element.isSkipParse) element match {
+    elements.foreach(element => if (!element.isSkipParse && !element.isHidden) element match {
       case TextElementMatcher(el) => addToArticle(new TextElement(el))
       case MediaElementMatcher(el) => addToArticle(new MediaElement(el))
       case LinkElementMatcher(el) => addToArticle(new LinkElement(el))

@@ -32,10 +32,18 @@ object Home extends Controller {
         error => NotFound,
         url => {
           val httpClient = new AsyncHttpClient(config)
+          var downloadTime = System.currentTimeMillis()
           val response = httpClient.prepareGet(url).execute().get()
+          downloadTime = System.currentTimeMillis() - downloadTime
+          var parseTime = System.currentTimeMillis()
           val doc = Jsoup.parse(response.getResponseBodyAsStream, null, url)
           val parser = new ArticleParser
           val article = parser.parse(doc)
+          parseTime = System.currentTimeMillis() - parseTime
+
+          println(s"Download: $downloadTime ms")
+          println(s"Parse: $parseTime ms")
+
           Ok(Json.obj(
             "title" -> article.title,
             "text" -> article.contentHtml

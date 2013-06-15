@@ -1,6 +1,7 @@
 package com.github.sonic.parser.model
 
 import org.jsoup.nodes.Element
+import org.apache.commons.lang.StringUtils
 
 /**
  * The Class LinkElement.
@@ -23,7 +24,18 @@ class LinkElement(_jsoupElement: Element)(implicit article: Article) extends Art
 }
 
 object LinkElementMatcher {
-  def unapply(jsoupElement: Element) = if(jsoupElement.tagName.toLowerCase == "a") {
+  def unapply(jsoupElement: Element): Option[Element] = if(jsoupElement.tagName.toLowerCase == "a") {
+    val imgElements = jsoupElement.select("img")
+    if(imgElements.size == 1) {
+      //It look like a gallery
+      val href = jsoupElement.attr("href")
+      val imgElement = imgElements.get(0)
+      val src = imgElement.attr("src")
+      if(StringUtils.isNotBlank(href) && href == src) {
+        // Skip this element because this is an gallery.
+        return None
+      }
+    }
     Some(jsoupElement)
   } else {
     None

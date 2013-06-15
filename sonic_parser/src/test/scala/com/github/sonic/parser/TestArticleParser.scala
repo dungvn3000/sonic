@@ -15,7 +15,7 @@ class TestArticleParser {
 
   @Test
   def testParser() {
-    val url = "http://xinhxinh.com.vn/phong-cach/20130613100611317/ao-co-sen-chua-bao-gio-loi-mot.xinh"
+    val url = "http://tuoitre.vn/Giao-duc/Khoa-hoc/552051/hoc-sinh-cap%C2%A0iii-my-che-tau-ngam-ca-nhan-2-000-usd.html"
     val doc = Jsoup.connect(url).get()
     val parser = new ArticleParser
     val article = parser.parse(doc)
