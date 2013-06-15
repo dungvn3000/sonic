@@ -1,7 +1,6 @@
 package com.github.sonic.parser.model
 
 import org.jsoup.nodes.{Element, Document}
-import collection.JavaConverters._
 import org.apache.http.client.utils.URIUtils
 import java.net.URI
 
@@ -14,7 +13,7 @@ import java.net.URI
  */
 class Article(val doc: Document, private val _containerElement: Option[Element] = None) {
 
-  val baseUrl = URIUtils.extractHost(new URI(doc.baseUri())).toURI
+  def baseUrl = URIUtils.extractHost(new URI(doc.baseUri())).toURI
 
   /**
    * Default is vi.
@@ -26,9 +25,14 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
   //This element will contain all text content element. Default is body element.
   var containerElement: Element = _containerElement.getOrElse(doc.body())
 
+  /**
+   * Article element list without title element.
+   */
+  var elements: List[ArticleElement] = Nil
+
   def textElements: List[TextElement] = elements.filter(_.isInstanceOf[TextElement]).map(_.asInstanceOf[TextElement])
 
-  def imageElements: List[ImageElement] = elements.filter(_.isInstanceOf[ImageElement]).map(_.asInstanceOf[ImageElement])
+  def imageElements: List[MediaElement] = elements.filter(_.isInstanceOf[MediaElement]).map(_.asInstanceOf[MediaElement])
 
   def linkElements: List[LinkElement] = elements.filter(_.isInstanceOf[LinkElement]).map(_.asInstanceOf[LinkElement])
 
@@ -39,6 +43,8 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
   def textContentElements: List[ArticleElement] = textElements.filter(_.isContent)
 
   def jsoupElements = elements.map(_.jsoupElement)
+
+  def images = imageElements.filter(_.isContent)
 
   def text = {
     val sb = new StringBuilder
@@ -51,66 +57,12 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
 
   def contentHtml = {
     val sb = new StringBuilder
-    contentElements.foreach(element => {
+    contentElements.foreach(element => if(!element.isTitle) {
       sb.append("<p>" + element.jsoupElement.outerHtml() + "</p>")
       sb.append("\n")
     })
     sb.toString()
   }
-
-  /**
-   * The short description text for the article. Find the longest block and split it to a description.
-   * @return
-   */
-  def description(maxNumbOfWord: Int = 30) = {
-    var bestDescription: String = ""
-    if (!textContentElements.isEmpty) {
-      bestDescription = textContentElements.sortBy(-_.text.length).head.text
-      val words = bestDescription.split(' ')
-      val sb = new StringBuilder
-      var wordCount = 0
-      words.foreach(word => {
-        if (wordCount < maxNumbOfWord) {
-          sb.append(word)
-          sb.append(" ")
-          wordCount +=1
-        }
-      })
-      bestDescription = sb.toString()
-    }
-    bestDescription
-  }
-
-  /**
-   * This is using for debugging.
-   * @return
-   */
-  def prettyText(wordInLine: Int = 20) = {
-    val sb = new StringBuilder
-    textContentElements.foreach(element => {
-      var count = 0
-      element.text.split(" ").foreach(word => {
-        sb.append(word + " ")
-        if (count > wordInLine) {
-          sb.append("\n")
-          count = 0
-        }
-        count += 1
-      })
-      sb.append("\n")
-    })
-    sb.toString()
-  }
-
-  def images = imageElements.filter(_.isContent)
-
-  //For java api
-  def imagesAsJavaList = imageElements.filter(_.isContent).asJava
-
-  /**
-   * Article element list without title element.
-   */
-  var elements: List[ArticleElement] = Nil
 
   override def toString = text
 }

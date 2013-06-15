@@ -7,6 +7,12 @@
 .*/avatar/.*
 .*/themes/.*
 .*/theme/.*
+.*/rss.png.*
+.*/rss.jpg.*
+.*/rss.gif.*
+.*/email.png.*
+.*/email.jpg.*
+.*/email.gif.*
 .*/print.png.*
 .*/print.jpg.*
 .*/print.gif.*
@@ -74,6 +80,7 @@ http://tuoitre.vn/Images/Trans.gif
 http://tuoitre.vn/Images/bookmark/.*
 hotline.gif
 mail.gif
+.*btn_a-.gif
 #Domain
 .*reddit.com.*
 .*facebook.com.*
@@ -84,3 +91,4 @@ mail.gif
 #VNExpress
 http://vnexpress.net/Images/boxcomment/orderlike_cmt.jpg
 http://vnexpress.net/images/boxcomment/xemthem_cmt.jpg
+

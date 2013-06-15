@@ -3,8 +3,8 @@ package com.github.sonic.parser.model
 import breeze.text.tokenize.JavaWordTokenizer
 import org.jsoup.nodes.Element
 import org.apache.commons.lang.StringUtils
-import JsoupElementWrapper._
 import com.github.sonic.parser.util.StopWordCounter
+import com.github.sonic.parser.util.ArticleUtil._
 
 /**
  * This class represent for a text block inside a html page.
@@ -18,7 +18,7 @@ class TextElement(_jsoupElement: Element)(implicit article: Article) extends Art
 
   private val _counter = new StopWordCounter(article.languageCode)
   private val _tokenizer = JavaWordTokenizer
-  private val _text = if (jsoupElement.detectTextBlock) jsoupElement.text else jsoupElement.ownText()
+  private val _text = jsoupElement.text
 
   var stopWordCount = 0
   var wordCount = 0
@@ -39,7 +39,7 @@ class TextElement(_jsoupElement: Element)(implicit article: Article) extends Art
     val linksElement = jsoupElement.select("a")
     if (!linksElement.isEmpty) {
       val numberWordInLink: Double = _tokenizer(linksElement.text()).size
-      val score = (numberWordInLink / wordCount) * 100
+      val score = numberWordInLink / wordCount * 100
       //If word in link more than 40% then return true
       if (score > 40) return true
     }
@@ -47,4 +47,12 @@ class TextElement(_jsoupElement: Element)(implicit article: Article) extends Art
   }
 
   override def toString = text
+}
+
+object TextElementMatcher {
+  def unapply(jsoupElement: Element) = if (isArticleContentTag(jsoupElement.tag) && StringUtils.isNotBlank(jsoupElement.ownText)) {
+    Some(jsoupElement)
+  } else {
+    None
+  }
 }

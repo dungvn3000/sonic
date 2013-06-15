@@ -46,6 +46,7 @@ object SonicBuild extends Build {
   ), path = file("sonic_web")).dependsOn(sonicParser)
 
   lazy val coreDependencies = Seq(
+    "org.scalaz" %% "scalaz-core" % "7.0.0",
     "org.slf4j" % "slf4j-simple" % "1.6.6",
     "org.slf4j" % "slf4j-api" % "1.6.6",
     "commons-collections" % "commons-collections" % "3.2.1",
@@ -61,7 +62,6 @@ object SonicBuild extends Build {
   )
 
   lazy val parserDependencies = Seq(
-    "net.sourceforge.nekohtml" % "nekohtml" % "1.9.18",
     "org.jsoup" % "jsoup" % "1.7.2",
     "org.apache.httpcomponents" % "httpclient" % "4.2.2",
     "org.scalanlp" %% "breeze-process" % "0.3"

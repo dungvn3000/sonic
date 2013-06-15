@@ -37,7 +37,7 @@ object Home extends Controller {
           val parser = new ArticleParser
           val article = parser.parse(doc)
           Ok(Json.obj(
-            "html" -> doc.html(),
+            "title" -> article.title,
             "text" -> article.contentHtml
           ))
         }

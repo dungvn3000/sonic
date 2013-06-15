@@ -1,6 +1,6 @@
 package com.github.sonic.parser.processor
 
-import com.github.sonic.parser.model.{ImageElement, Article}
+import com.github.sonic.parser.model.{MediaElement, Article}
 import org.apache.commons.lang.StringUtils
 import org.apache.commons.validator.routines.UrlValidator
 import edu.uci.ics.crawler4j.url.URLCanonicalizer
@@ -17,7 +17,7 @@ class BrokenLinkFixed extends Processor {
   def process(implicit article: Article) {
     article.contentElements.foreach(element => {
       element match {
-        case image: ImageElement =>
+        case image: MediaElement =>
           //Fix relative url.
           if (StringUtils.isNotBlank(image.src)) {
             val urlValidator = new UrlValidator(Array("http", "https"))

@@ -3,11 +3,7 @@ package com.github.sonic.parser.processor
 import collection.mutable.ListBuffer
 import com.github.sonic.parser.model._
 import collection.JavaConversions._
-import org.jsoup.nodes.Element
-import com.github.sonic.parser.util.ArticleUtil._
-import com.github.sonic.parser.model.LinkElement
 import com.github.sonic.parser.model.Article
-import com.github.sonic.parser.model.TextElement
 import JsoupElementWrapper._
 
 /**
@@ -23,63 +19,21 @@ class ArticleExtractor extends Processor {
     implicit val articleElements = new ListBuffer[ArticleElement]
     val elements = article.containerElement.getAllElements
 
-    elements.foreach(element => if (!element.isSkipParse) element.tagName match {
-      case "title" => //Ignore
-      case "a" => handleAElement(element)
-      case "img" => handleImgElement(element)
-      case _ => handleElement(element)
+    elements.foreach(element => if (!element.isSkipParse) element match {
+      case TextElementMatcher(el) => addToArticle(new TextElement(el))
+      case MediaElementMatcher(el) => addToArticle(new MediaElement(el))
+      case LinkElementMatcher(el) => addToArticle(new LinkElement(el))
+      case _ => //ignore
     })
 
     article.elements = articleElements.toList
   }
 
   private def addToArticle(element: ArticleElement)(implicit articleElements: ListBuffer[ArticleElement]) {
+    //Skip all children
+    element.jsoupElement.children().foreach(_.isSkipParse = true)
     element.index = articleElements.size
     articleElements += element
-  }
-
-  private def handleAElement(element: Element)(implicit articleElements: ListBuffer[ArticleElement], article: Article) {
-    //A link element should be empty
-    if (element.children.isEmpty) {
-      val linkElement = new LinkElement(element)
-      addToArticle(linkElement)
-    } else {
-      //If not
-      val imageElements = element.select("img")
-      if (imageElements.isEmpty) {
-        val linkElement = new LinkElement(element)
-        addToArticle(linkElement)
-
-        //Skip parse a element content except img element
-        element.innerAllElements.foreach(_.isSkipParse = true)
-      }
-    }
-  }
-
-  private def handleImgElement(element: Element)(implicit articleElements: ListBuffer[ArticleElement], article: Article) {
-    val imgElement = new ImageElement(element)
-    addToArticle(imgElement)
-  }
-
-  private def handleElement(element: Element)(implicit articleElements: ListBuffer[ArticleElement], article: Article) {
-    if (isArticleContentTag(element.tag)) {
-
-      if (element.isHidden) {
-        //If it is hidden skip parse all children.
-        element.getAllElements.foreach(_.isSkipParse = true)
-      } else if (element.detectTextBlock) {
-        //In case this block has own text, to avoid duplicate.
-        element.innerAllElements.foreach(inner => if (inner.tagName != "img") inner.isSkipParse = true)
-      }
-
-      if (!element.isHidden) {
-        val textElement = new TextElement(element)
-        if (textElement.hasText) {
-          addToArticle(textElement)
-        }
-      }
-
-    }
   }
 
 }

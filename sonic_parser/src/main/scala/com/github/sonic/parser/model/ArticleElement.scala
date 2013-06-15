@@ -72,15 +72,14 @@ abstract class ArticleElement(_jsoupElement: Element)(implicit article: Article)
    */
   def score: Double = 0
 
-
-  override def equals(obj: Any): Boolean = {
-    if (obj.isInstanceOf[TextElement]) {
-      val element2 = obj.asInstanceOf[TextElement].jsoupElement
+  override def equals(obj: Any): Boolean = obj match {
+    case element: ArticleElement =>
+      val element2 = element.jsoupElement
       jsoupElement.equals(element2)
-    } else {
+    case _ =>
       false
-    }
   }
+
 
   override def hashCode() = jsoupElement.hashCode()
 

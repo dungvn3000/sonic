@@ -1,6 +1,6 @@
 package com.github.sonic.parser.processor
 
-import com.github.sonic.parser.model.{ArticleElement, ImageElement, Article}
+import com.github.sonic.parser.model.{ArticleElement, MediaElement, Article}
 
 /**
  * Thi class will mark an image what has the previous or next potential element is become potential.
@@ -9,7 +9,7 @@ import com.github.sonic.parser.model.{ArticleElement, ImageElement, Article}
  * @since 12/24/12 9:07 AM
  *
  */
-class ImageBaseFilter(minImageTitleLength: Int = 2) extends Processor {
+class MediaBaseFilter(minImageTitleLength: Int = 2) extends Processor {
   def process(implicit article: Article) {
     var previous: Option[ArticleElement] = None
     var next: Option[ArticleElement] = None
@@ -19,12 +19,12 @@ class ImageBaseFilter(minImageTitleLength: Int = 2) extends Processor {
 
       val element = article.elements(i)
 
-      if (!element.isPotential && element.isInstanceOf[ImageElement]) {
+      if (!element.isPotential && element.isInstanceOf[MediaElement]) {
         previous.map(prevElement => if (prevElement.isPotential) element.isPotential = true)
         next.map(nextElement => if (nextElement.isPotential) element.isPotential = true)
       }
 
-      if (element.isPotential && element.isInstanceOf[ImageElement]) {
+      if (element.isPotential && element.isInstanceOf[MediaElement]) {
         //The image title should mark as a potential element.
         next.map(nextElement => if (element.isPotential && nextElement.text.length >= minImageTitleLength) nextElement.isPotential = true)
       }

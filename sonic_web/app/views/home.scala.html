@@ -36,7 +36,10 @@
 <iframe class="ui-layout-west left-col" src="" frameborder="0" scrolling="auto"></iframe>
 
 <div class="ui-layout-center right-col">
-
+    <legend>
+        <h2 class="title"></h2>
+    </legend>
+    <div class="content"></div>
 </div>
 
 </body>
@@ -48,7 +51,8 @@
             north__resizable: false,
             west__size: '50%',
             west__resizeWhileDragging: false,
-            maskContents: true
+            maskContents: true,
+            spacing_open: 4
         });
 
 
@@ -61,7 +65,8 @@
                 url: '/parseUrl',
                 data: {url: $('#url').val()},
                 success: function (data) {
-                    $('.right-col').html(data.text);
+                    $('.title').html(data.title);
+                    $('.content').html(data.text);
                 },
                 error: function () {
                     alert("Somg thing go wrong");

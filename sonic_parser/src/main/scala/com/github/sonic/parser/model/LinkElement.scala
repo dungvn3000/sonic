@@ -21,3 +21,11 @@ class LinkElement(_jsoupElement: Element)(implicit article: Article) extends Art
 
   override def toString = jsoupElement.attr("href")
 }
+
+object LinkElementMatcher {
+  def unapply(jsoupElement: Element) = if(jsoupElement.tagName.toLowerCase == "a") {
+    Some(jsoupElement)
+  } else {
+    None
+  }
+}

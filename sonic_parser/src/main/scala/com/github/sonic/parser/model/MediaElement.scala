@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element
  * @since 12/23/12 1:04 AM
  *
  */
-class ImageElement(_jsoupElement: Element)(implicit article: Article) extends ArticleElement(_jsoupElement) {
+class MediaElement(_jsoupElement: Element)(implicit article: Article) extends ArticleElement(_jsoupElement) {
 
   def text = ""
 
@@ -21,4 +21,11 @@ class ImageElement(_jsoupElement: Element)(implicit article: Article) extends Ar
   override def score = if (isPotential) 100 else super.score
 
   override def toString = src
+}
+
+object MediaElementMatcher {
+  def unapply(jsoupElement: Element) = jsoupElement.tagName.toLowerCase match {
+    case "img" | "object" | "embed" => Some(jsoupElement)
+    case _ => None
+  }
 }

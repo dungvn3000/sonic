@@ -26,7 +26,7 @@ class ArticleParser {
     new TitleBaseFilter,
     new NumbOfWordFilter,
     new TagBaseFilter,
-    new ImageBaseFilter,
+    new MediaBaseFilter,
     new DistanceBaseFilter,
     //Step4: Remove bad quality element.
     new DirtyImageFilter,
