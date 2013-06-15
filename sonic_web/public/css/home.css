@@ -10,11 +10,6 @@ html, body, .container-fluid {
     height: 85%;
 }
 
-.content div {
-    height: 100%;
-    width: 100%;
-}
-
 .left-col, .right-col {
     border: 1px solid #cfcfcf;
     overflow:	auto;

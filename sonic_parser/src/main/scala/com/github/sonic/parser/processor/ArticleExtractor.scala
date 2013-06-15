@@ -31,7 +31,7 @@ class ArticleExtractor extends Processor {
 
   private def addToArticle(element: ArticleElement)(implicit articleElements: ListBuffer[ArticleElement]) {
     //Skip all children
-    element.jsoupElement.children().foreach(_.isSkipParse = true)
+    element.jsoupElement.getAllElements.foreach(_.isSkipParse = true)
     element.index = articleElements.size
     articleElements += element
   }

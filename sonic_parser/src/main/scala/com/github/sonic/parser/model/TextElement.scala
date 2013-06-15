@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element
 import org.apache.commons.lang.StringUtils
 import com.github.sonic.parser.util.StopWordCounter
 import com.github.sonic.parser.util.ArticleUtil._
+import JsoupElementWrapper._
 
 /**
  * This class represent for a text block inside a html page.
@@ -50,7 +51,7 @@ class TextElement(_jsoupElement: Element)(implicit article: Article) extends Art
 }
 
 object TextElementMatcher {
-  def unapply(jsoupElement: Element) = if (isArticleContentTag(jsoupElement.tag) && StringUtils.isNotBlank(jsoupElement.ownText)) {
+  def unapply(jsoupElement: Element) = if (isArticleContentTag(jsoupElement.tagName.toLowerCase) && jsoupElement.isTextBlock) {
     Some(jsoupElement)
   } else {
     None

@@ -3,6 +3,7 @@ package com.github.sonic.parser.model
 import org.jsoup.nodes.Element
 import collection.JavaConversions._
 import java.util.regex.Pattern
+import org.apache.commons.lang.StringUtils
 
 /**
  * The Class to warp jsoup element to add more function to it.
@@ -31,14 +32,14 @@ class JsoupElementWrapper(element: Element) {
    * Check this element whether should get it's text or it's own text.
    * @return
    */
-  def detectTextBlock = {
+  def isTextBlock = {
     var allIsInLineElement = true
-    element.children.foreach(child => {
+    element.getAllElements.foreach(child => if(child != element) {
       if (child.isBlock || child.tagName == "a" || child.tagName == "select") {
         allIsInLineElement = false
       }
     })
-    !element.ownText.isEmpty || allIsInLineElement
+    StringUtils.isNotBlank(element.ownText) || allIsInLineElement && StringUtils.isNotBlank(element.text)
   }
 
 

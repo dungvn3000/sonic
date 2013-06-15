@@ -1,6 +1,6 @@
 package com.github.sonic.parser.util
 
-import org.jsoup.parser.Tag
+import org.apache.commons.lang.StringUtils
 
 /**
  * The Class ArticleUtil.
@@ -11,18 +11,19 @@ import org.jsoup.parser.Tag
  */
 object ArticleUtil {
 
-  def isArticleContentTag(tag: Tag) = tag.getName != "title" &&
-    tag.getName != "head" &&
-    tag.getName != "meta" &&
-    tag.getName != "script" &&
-    tag.getName != "style" &&
-    tag.getName != "link" &&
-    tag.getName != "iframe" &&
-    tag.getName != "select" &&
-    tag.getName != "option" &&
-    tag.getName != "noscript"
+  def isArticleContentTag(tagName: String) = StringUtils.isNotBlank(tagName) &&
+    tagName != "title" &&
+    tagName != "head" &&
+    tagName != "meta" &&
+    tagName != "script" &&
+    tagName != "style" &&
+    tagName != "link" &&
+    tagName != "iframe" &&
+    tagName != "select" &&
+    tagName != "option" &&
+    tagName != "noscript"
 
-  def removeNonAlphabetsCharacter(st: String) = st.replaceAll("[^a-zA-Z0-9]","")
+  def removeNonAlphabetsCharacter(st: String) = st.replaceAll("[^a-zA-Z0-9]", "")
 
   /**
    * Checking whether the title is contain the text or not, by skip non alphabet character.

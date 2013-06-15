@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils
 import collection.mutable.ListBuffer
 import collection.JavaConversions._
 import com.github.sonic.parser.util.{ArticleUtil, StopWordCounter}
+import breeze.text.tokenize.JavaWordTokenizer
 
 /**
  * The Class TitleExtractor.
@@ -24,6 +25,8 @@ class TitleExtractor(minTitleLength: Int = 5) extends Processor {
    */
   def process(implicit article: Article) {
     val counter = new StopWordCounter(article.languageCode)
+    val tokenizer = JavaWordTokenizer
+
 
     val potentialTitles = new ListBuffer[String]
     val elements = article.doc.getAllElements
@@ -39,8 +42,10 @@ class TitleExtractor(minTitleLength: Int = 5) extends Processor {
           //In case element is h element, we will pick it as the title and stop searching.
           if ((element.tagName.contains("h") || element.attr("class").toLowerCase.contains("title"))
             && element.children.isEmpty) {
-            article.title = text
-            return
+            if (tokenizer(text).size > 2) {
+              article.title = text
+              return
+            }
           } else if (!potentialTitles.contains(text)) {
             potentialTitles += text
           }

@@ -15,7 +15,7 @@ class DirtyImageFilter extends Processor {
   val dirtyImagePattern = new DirtyImagePattern
 
   def process(implicit article: Article) {
-    article.imageElements.foreach(element => {
+    article.mediaElements.foreach(element => {
       if (dirtyImagePattern.matches(element.src)) {
         element.isPotential = false
       }

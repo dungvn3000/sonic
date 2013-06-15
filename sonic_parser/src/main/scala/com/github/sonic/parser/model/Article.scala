@@ -32,7 +32,7 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
 
   def textElements: List[TextElement] = elements.filter(_.isInstanceOf[TextElement]).map(_.asInstanceOf[TextElement])
 
-  def imageElements: List[MediaElement] = elements.filter(_.isInstanceOf[MediaElement]).map(_.asInstanceOf[MediaElement])
+  def mediaElements: List[MediaElement] = elements.filter(_.isInstanceOf[MediaElement]).map(_.asInstanceOf[MediaElement])
 
   def linkElements: List[LinkElement] = elements.filter(_.isInstanceOf[LinkElement]).map(_.asInstanceOf[LinkElement])
 
@@ -44,7 +44,7 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
 
   def jsoupElements = elements.map(_.jsoupElement)
 
-  def images = imageElements.filter(_.isContent)
+  def images = mediaElements.filter(_.isContent)
 
   def text = {
     val sb = new StringBuilder
@@ -58,7 +58,7 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
   def contentHtml = {
     val sb = new StringBuilder
     contentElements.foreach(element => if(!element.isTitle) {
-      sb.append("<p>" + element.jsoupElement.outerHtml() + "</p>")
+      sb.append("<div>" + element.jsoupElement.outerHtml() + "</div>")
       sb.append("\n")
     })
     sb.toString()
