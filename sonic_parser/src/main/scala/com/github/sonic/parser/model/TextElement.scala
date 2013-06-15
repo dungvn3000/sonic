@@ -31,7 +31,7 @@ class TextElement(_jsoupElement: Element)(implicit article: Article) extends Art
 
   def text = _text
 
-  override def score = wordCount * (stopWordCount + 1)
+  override def score = wordCount * (stopWordCount + 1) + jsoupElement.select("img").size() * 1000
 
   /**
    * Checks the density of links within this element
