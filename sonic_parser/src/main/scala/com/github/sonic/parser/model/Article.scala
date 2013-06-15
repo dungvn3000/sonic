@@ -44,7 +44,7 @@ class Article(val doc: Document, private val _containerElement: Option[Element] 
 
   def jsoupElements = elements.map(_.jsoupElement)
 
-  def images = mediaElements.filter(_.isContent)
+  def images = contentElements.filter(_.tagName == "img")
 
   def text = {
     val sb = new StringBuilder
