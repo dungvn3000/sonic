@@ -12,19 +12,19 @@
 </div>
 
 <div class="ui-layout-north">
-    <form class="form-inline" style="padding-top: 50px;">
-        <input id="url" type="text" class="input-xxlarge" name="url" placeholder="Url">
-        <a id="parseBtn" class="btn btn-primary">Parse</a>
-    </form>
+    <div style="padding-top: 50px">
+        <a href="#" class="btn btn-primary" id="extractBtn">Extract</a>
+    </div>
 </div>
 
-<iframe class="ui-layout-west left-col" src="" frameborder="0" scrolling="auto"></iframe>
+<div class="ui-layout-west left-col">
+    <div id="editor"></div>
+</div>
 
 <div class="ui-layout-center right-col">
-    <legend>
-        <h3 class="title"></h3>
-    </legend>
-    <div class="content"></div>
+    <div class="images"></div>
+    <hr>
+    <div class="text"></div>
 </div>
 
 </body>
@@ -39,27 +39,25 @@
             maskContents: true,
             spacing_open: 4
         });
-
-
-        $('#parseBtn').click(function () {
-            $.blockUI({baseZ: 9999});
-            $('.left-col').attr('src', $('#url').val());
+        var editor = ace.edit("editor");
+        editor.setFontSize(14);
+        editor.setTheme("ace/theme/chrome");
+        editor.getSession().setMode("ace/mode/html");
+        $('#extractBtn').click(function () {
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: '/parseUrl',
-                data: {url: $('#url').val()},
+                url: '/parseHtml',
+                data: {html: editor.getValue()},
                 success: function (data) {
-                    $('.title').html(data.title);
-                    $('.content').html(data.text);
+                    $('.images').html(data.images);
+                    $('.text').html(data.text);
                 },
                 error: function () {
                     alert("Some thing go wrong");
                 }
             })
         });
-
-        $(document).ajaxStop($.unblockUI);
     });
 </script>
 </html>

@@ -6,6 +6,9 @@
 GET     /                                   controllers.Home.index
 POST    /parseUrl                           controllers.Home.parseUrl
 
+GET     /extractor                          controllers.Extractor.index
+POST    /parseHtml                          controllers.Extractor.parseHtml
+
 GET     /about                              controllers.Home.about
 
 # Map static resources from the /public folder to the /assets URL path
