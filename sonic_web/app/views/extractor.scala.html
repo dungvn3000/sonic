@@ -22,9 +22,6 @@
 </div>
 
 <div class="ui-layout-center right-col">
-    <div class="images"></div>
-    <hr>
-    <div class="text"></div>
 </div>
 
 </body>
@@ -50,8 +47,13 @@
                 url: '/parseHtml',
                 data: {html: editor.getValue()},
                 success: function (data) {
-                    $('.images').html(data.images);
-                    $('.text').html(data.text);
+                    var content = $('.right-col');
+                    content.append('<ul>');
+                    _.each(data.images, function (img) {
+                        content.append("<li>" + img + "</li>")
+                    });
+                    content.append('</ul><br>');
+                    content.append(data.text)
                 },
                 error: function () {
                     alert("Some thing go wrong");

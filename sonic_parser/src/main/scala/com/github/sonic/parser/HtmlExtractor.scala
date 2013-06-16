@@ -30,7 +30,7 @@ class HtmlExtractor {
       val src = img.attr("src")
       if (StringUtils.isNotBlank(src)) {
         if(StringUtils.isNotBlank(doc.baseUri)) {
-          def baseUrl = URIUtils.extractHost(new URI(doc.baseUri)).toURI
+          val baseUrl = URIUtils.extractHost(new URI(doc.baseUri)).toURI
           if (baseUrl != null) {
             val fixedUrl = URLCanonicalizer.getCanonicalURL(src, baseUrl)
             if (StringUtils.isNotBlank(fixedUrl) && urlValidator.isValid(fixedUrl)) {
