@@ -19,7 +19,8 @@
 </div>
 
 <div class="content">
-
+    <div class="url"></div>
+    <div class="name"></div>
 </div>
 
 </body>
@@ -34,7 +35,8 @@
                 url: '/extractRss',
                 data: {url: $('#url').val()},
                 success: function (data) {
-                    $('.content').html(data)
+                    $('.url').html(data.url);
+                    $('.name').html(data.name);
                 },
                 error: function () {
                     alert("Some thing go wrong");

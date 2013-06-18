@@ -26,7 +26,10 @@ object Rss extends Controller {
         url => {
           val rssExtractor = new RssExtractor
           rssExtractor.parse(url)
-          Ok(Json.arr(rssExtractor.rss))
+          Ok(Json.obj(
+            "url" -> rssExtractor.rssUrl,
+            "name" -> rssExtractor.rssName
+          ))
         }
       )
   }
