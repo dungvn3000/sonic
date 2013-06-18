@@ -64,6 +64,8 @@ abstract class ArticleElement(_jsoupElement: Element)(implicit article: Article)
 
   def text: String
 
+  def html = jsoupElement.html
+
   def hasText = StringUtils.isNotBlank(text)
 
   /**

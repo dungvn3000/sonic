@@ -38,7 +38,8 @@ class ArticleParser {
     new ExpandTitleToContentFilter,
     //Step 6: Fixed broken link
     new BrokenLinkFixed,
-    new StyleCleaner
+    new StyleCleaner,
+    new DuplicateCleaner
   )
 
   /**
