@@ -23,10 +23,14 @@ object SonicBuild extends Build {
   )
 
   lazy val sonic = Project(appName, file("."), settings = sharedSetting).aggregate(
-    sonicParser, sonicWeb
+    horrorss, sonicParser, sonicWeb
   )
 
   lazy val sonicParser = Project("sonic_parser", file("sonic_parser"), settings = sharedSetting).settings(
+    libraryDependencies ++= coreDependencies ++ parserDependencies ++ testDependencies
+  ).dependsOn(horrorss)
+
+  lazy val horrorss = Project("horrorss", file("horrorss"), settings = sharedSetting).settings(
     libraryDependencies ++= coreDependencies ++ parserDependencies ++ testDependencies
   )
 
