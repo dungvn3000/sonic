@@ -16,6 +16,7 @@ class StyleCleaner extends Processor {
       element.jsoupElement.getAllElements.foreach(jsoupEl => {
         jsoupEl.removeAttr("class")
         jsoupEl.removeAttr("style")
+        jsoupEl.removeAttr("skip-parse")
         if(jsoupEl.tagName == "img") {
           //set max width and max height for image
           jsoupEl.attr("style", "max-width: 500px !important; max-height: 400px !important")

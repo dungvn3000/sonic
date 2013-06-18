@@ -23,23 +23,12 @@ object SonicBuild extends Build {
   )
 
   lazy val sonic = Project(appName, file("."), settings = sharedSetting).aggregate(
-    sonicCore, sonicModel, sonicParser, sonicExtractor, sonicWeb
+    sonicParser, sonicWeb
   )
-
-  lazy val sonicCore = Project("sonic_core", file("sonic_core"), settings = sharedSetting).settings(
-    libraryDependencies ++= coreDependencies ++ testDependencies
-  )
-
-  lazy val sonicModel = Project("sonic_model", file("sonic_model"), settings = sharedSetting).settings(
-  ).dependsOn(sonicCore)
 
   lazy val sonicParser = Project("sonic_parser", file("sonic_parser"), settings = sharedSetting).settings(
-    libraryDependencies ++= parserDependencies ++ testDependencies
-  ).dependsOn(sonicExtractor)
-
-  lazy val sonicExtractor = Project("sonic_extractor", file("sonic_extractor"), settings = sharedSetting).settings(
-    libraryDependencies ++= testDependencies
-  ).dependsOn(sonicModel)
+    libraryDependencies ++= coreDependencies ++ parserDependencies ++ testDependencies
+  )
 
   lazy val sonicWeb = play.Project("sonic_web", appVersion, path = file("sonic_web")).dependsOn(sonicParser)
 
