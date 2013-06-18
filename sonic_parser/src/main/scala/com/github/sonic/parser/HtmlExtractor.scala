@@ -9,6 +9,7 @@ import edu.uci.ics.crawler4j.url.URLCanonicalizer
 import org.apache.commons.validator.routines.UrlValidator
 import scala._
 import scala.collection.mutable.ListBuffer
+import scala.util.control.Breaks._
 
 /**
  * This extractor using for get image and text from a html fragment.
@@ -29,7 +30,7 @@ class HtmlExtractor {
     images.foreach(img => {
       val src = img.attr("src")
       if (StringUtils.isNotBlank(src)) {
-        if(StringUtils.isNotBlank(doc.baseUri)) {
+        if (StringUtils.isNotBlank(doc.baseUri)) {
           val baseUrl = URIUtils.extractHost(new URI(doc.baseUri)).toURI
           if (baseUrl != null) {
             val fixedUrl = URLCanonicalizer.getCanonicalURL(src, baseUrl)
@@ -41,7 +42,21 @@ class HtmlExtractor {
         this.images += src
       }
     })
-    text = doc.text()
+    val text = doc.text()
+    if (StringUtils.isNotBlank(text)) {
+      val sb = new StringBuilder
+      var count = 0
+      breakable {
+        for (char <- text.toCharArray) {
+          sb.append(char)
+          count += 1
+          if (char == '.' || count > 500) {
+            break()
+          }
+        }
+      }
+      this.text = sb.toString()
+    }
   }
 
 }

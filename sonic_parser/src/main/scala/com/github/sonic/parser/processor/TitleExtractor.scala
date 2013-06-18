@@ -24,6 +24,9 @@ class TitleExtractor(minTitleLength: Int = 5) extends Processor {
    * @return
    */
   def process(implicit article: Article) {
+
+    if (StringUtils.isNotBlank(article.title)) return
+
     val counter = new StopWordCounter(article.languageCode)
     val tokenizer = JavaWordTokenizer
 

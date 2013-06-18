@@ -3,6 +3,7 @@ package com.github.sonic.parser
 import processor._
 import model.Article
 import org.jsoup.nodes.Document
+import org.apache.commons.lang.StringUtils
 
 /**
  * The Class ArticleParser.
@@ -52,4 +53,18 @@ class ArticleParser {
     processorsForAutoMode.process(article)
     article
   }
+
+  /**
+   * Parse a html document with special title to an article
+   * @param doc
+   * @param title
+   * @return
+   */
+  def parse(doc: Document, title: String) = {
+    val article = new Article(doc.normalise())
+    if (StringUtils.isNotBlank(title)) article.title = title
+    processorsForAutoMode.process(article)
+    article
+  }
+
 }
