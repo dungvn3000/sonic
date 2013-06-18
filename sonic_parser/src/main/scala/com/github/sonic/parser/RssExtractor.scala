@@ -10,7 +10,7 @@ import org.apache.commons.validator.routines.UrlValidator
 import org.apache.commons.lang.StringUtils
 import scala.util.control.Breaks._
 import org.apache.http.HttpStatus
-import org.horrabin.horrorss.RssParser
+import com.sun.syndication.io.{XmlReader, SyndFeedInput}
 
 /**
  * The Class RssExtractor.
@@ -62,9 +62,9 @@ class RssExtractor {
     rssUrl.map(url => {
       val response = httpClient.prepareGet(url).execute().get()
       if (response.getStatusCode == HttpStatus.SC_OK) {
-        val rssParser = new RssParser
-        val feed = rssParser.load(response.getResponseBodyAsStream)
-        rssName = Some(feed.getChannel.getTitle)
+        val input = new SyndFeedInput
+        val feed = input.build(new XmlReader(response.getResponseBodyAsStream))
+        rssName = Some(feed.getTitle)
       }
     })
   }

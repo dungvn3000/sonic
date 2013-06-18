@@ -23,14 +23,10 @@ object SonicBuild extends Build {
   )
 
   lazy val sonic = Project(appName, file("."), settings = sharedSetting).aggregate(
-    horrorss, sonicParser, sonicWeb
+    sonicParser, sonicWeb
   )
 
   lazy val sonicParser = Project("sonic_parser", file("sonic_parser"), settings = sharedSetting).settings(
-    libraryDependencies ++= coreDependencies ++ parserDependencies ++ testDependencies
-  ).dependsOn(horrorss)
-
-  lazy val horrorss = Project("horrorss", file("horrorss"), settings = sharedSetting).settings(
     libraryDependencies ++= coreDependencies ++ parserDependencies ++ testDependencies
   )
 
@@ -53,6 +49,7 @@ object SonicBuild extends Build {
   )
 
   lazy val parserDependencies = Seq(
+    "rome" % "rome" % "1.0",
     "com.ning" % "async-http-client" % "1.7.16",
     "org.jsoup" % "jsoup" % "1.7.2",
     "org.apache.httpcomponents" % "httpclient" % "4.2.2",

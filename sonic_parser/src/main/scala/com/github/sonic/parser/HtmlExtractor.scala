@@ -50,7 +50,7 @@ class HtmlExtractor {
         for (char <- text.toCharArray) {
           sb.append(char)
           count += 1
-          if (char == '.' || count > 500) {
+          if (char == '.' && count > 300 || count > 1000) {
             break()
           }
         }
