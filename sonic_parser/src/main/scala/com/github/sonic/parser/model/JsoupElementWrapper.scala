@@ -47,7 +47,7 @@ class JsoupElementWrapper(element: Element) {
    * Check whether the element is hidden or not.
    * @return
    */
-  def isHidden = hiddenStyle.matcher(element.attr("style")).matches()
+  def isHidden = hiddenStyle.matcher(element.attr("style")).matches() || element.hasClass("hidden")
 
   /**
    * Same with method getAllElements but exclude it's self.

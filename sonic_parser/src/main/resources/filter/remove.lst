@@ -2,6 +2,7 @@
 .*related_library_content.*
 .*tags-on-articles.*
 comment
+comments
 Sociable
 email-print
 share
@@ -31,3 +32,5 @@ facebook
 fbFeedbackContent
 trend_link
 fb-recommendations
+storycomment
+ctl00_leftContent_ND_CM1_pnComment
