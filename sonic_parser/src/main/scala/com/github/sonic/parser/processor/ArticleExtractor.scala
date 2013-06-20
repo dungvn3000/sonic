@@ -33,6 +33,9 @@ class ArticleExtractor extends Processor {
     //Skip all children
     element.jsoupElement.getAllElements.foreach(_.isSkipParse = true)
     element.index = articleElements.size
+
+    //marked element in white list is content
+    if(element.jsoupElement.isWhiteList) element.isContent = true
     articleElements += element
   }
 

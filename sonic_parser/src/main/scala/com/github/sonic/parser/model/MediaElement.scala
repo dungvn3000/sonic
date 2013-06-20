@@ -26,6 +26,10 @@ class MediaElement(_jsoupElement: Element)(implicit article: Article) extends Ar
 object MediaElementMatcher {
   def unapply(jsoupElement: Element) = jsoupElement.tagName.toLowerCase match {
     case "img" | "object" | "embed" => Some(jsoupElement)
+    case "iframe" => {
+      val src = jsoupElement.attr("src")
+      if (src.contains("youtube.com")) Some(jsoupElement) else None
+    }
     case _ => None
   }
 }

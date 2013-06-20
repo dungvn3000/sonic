@@ -15,7 +15,7 @@ class ExpandTitleToContentFilter extends Processor {
       article.elements.find(_.isTitle).map(title => {
         val titleIndex = title.index
         val contentIndex = article.contentElements.head.index
-        for (i <- titleIndex to contentIndex if (article.elements(i).isPotential)) {
+        for (i <- titleIndex to contentIndex if article.elements(i).isPotential) {
           article.elements(i).isContent = true
         }
       })

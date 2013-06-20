@@ -18,6 +18,7 @@ class AutoModeController extends Controller {
     new LanguageDetector,
     new RemoveHiddenElement,
     new RemoveDirtyElementFilter,
+    new WhiteListProcessor,
     //Step2: Extract article elements.
     new ArticleExtractor,
     new TitleExtractor,

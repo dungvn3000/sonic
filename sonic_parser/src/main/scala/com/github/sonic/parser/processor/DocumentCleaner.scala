@@ -1,6 +1,7 @@
 package com.github.sonic.parser.processor
 
 import com.github.sonic.parser.model.Article
+import collection.JavaConversions._
 
 /**
  * The Class DocumentCleaner.
@@ -12,7 +13,7 @@ import com.github.sonic.parser.model.Article
 class DocumentCleaner extends Processor {
   def process(implicit article: Article) {
     val containerElement = article.containerElement
-    val cleanedHtml = containerElement.html.replaceAll("&nbsp;"," ")
+    val cleanedHtml = containerElement.html.replaceAll("&nbsp;", " ")
     containerElement.html(cleanedHtml)
 
     //Remove noscript tag
@@ -23,6 +24,9 @@ class DocumentCleaner extends Processor {
     scriptElement.remove()
 
     val iframeElement = containerElement.select("iframe")
-    iframeElement.remove()
+    iframeElement.filterNot(el => {
+      val src = el.attr("src")
+      src.contains("youtube.com")
+    }).remove()
   }
 }

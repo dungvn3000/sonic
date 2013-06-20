@@ -29,6 +29,12 @@ class JsoupElementWrapper(element: Element) {
   }
 
   /**
+   * This attribute will be mark by white list processor.
+   * @return
+   */
+  def isWhiteList = element.attr("white-list") == "true"
+
+  /**
    * Check this element whether should get it's text or it's own text.
    * @return
    */
