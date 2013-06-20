@@ -29,7 +29,9 @@ class BrokenLinkFixed extends Processor {
           if (StringUtils.isNotBlank(url)) {
             val urlValidator = new UrlValidator(Array("http", "https"))
             if (article.baseUrl != null) {
-              val fixedUrl = URLCanonicalizer.getCanonicalURL(url, article.baseUrl)
+              //Fix url has a white space
+              val cleanUrl = StringUtils.trim(url.replace(" ", "%20"))
+              val fixedUrl = URLCanonicalizer.getCanonicalURL(cleanUrl, article.baseUrl)
               if (StringUtils.isNotBlank(fixedUrl) && urlValidator.isValid(fixedUrl)) {
                 jsoupEl.attr(attr, fixedUrl)
               }
