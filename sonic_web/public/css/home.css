@@ -2,6 +2,11 @@ html, body, .container-fluid {
     height: 100%;
 }
 
+body {
+    line-height: 1.5;
+    font-size: 15px;
+}
+
 .header {
     padding-top: 50px;
 }
