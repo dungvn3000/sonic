@@ -3,7 +3,7 @@ package com.github.sonic.parser
 import model.Article
 import org.jsoup.nodes.Document
 import org.apache.commons.lang.StringUtils
-import com.github.sonic.parser.controller.{YoutubeController, AutoModeController}
+import com.github.sonic.parser.controller.{VideoSiteController, AutoModeController}
 
 /**
  * The Class ArticleParser.
@@ -16,7 +16,7 @@ class ArticleParser {
 
   //The order of processor is very important, the parser only using the first match controller
   val controllers = List(
-    new YoutubeController,
+    new VideoSiteController,
     new AutoModeController
   )
 

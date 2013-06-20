@@ -14,11 +14,11 @@ import scala.collection.mutable.ListBuffer
  * @since 6/19/13 11:00 PM
  *
  */
-class YoutubeExtractor extends Processor {
+class VideoSiteExtractor extends Processor {
   def process(implicit article: Article) {
     val doc = article.doc
-    val titleEl = doc.select("meta[name=title]")
-    val descriptionEl = doc.select("meta[name=description]")
+    val titleEl = doc.select("meta[property=og:title]")
+    val descriptionEl = doc.select("meta[property=og:description]")
     val playerEl = doc.select("meta[name=twitter:player]")
     val thumpEl = doc.select("meta[name=twitter:image]")
 
@@ -29,7 +29,7 @@ class YoutubeExtractor extends Processor {
     })
 
     playerEl.headOption.map(_.attr("content")).map(embedUrl => {
-      html += s"<iframe width='480' height='270' src='$embedUrl?feature=oembed' frameborder='0' allowfullscreen></iframe>"
+      html += s"<iframe width='480' style='z-index: -1' height='270' src='$embedUrl?feature=oembed' frameborder='0'></iframe>"
     }).getOrElse({
       thumpEl.headOption.map(_.attr("content")).map(url => {
         html += s"<img src='$url'><img>"
