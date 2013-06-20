@@ -1,9 +1,9 @@
 package com.github.sonic.parser
 
-import processor._
 import model.Article
 import org.jsoup.nodes.Document
 import org.apache.commons.lang.StringUtils
+import com.github.sonic.parser.controller.{YoutubeController, AutoModeController}
 
 /**
  * The Class ArticleParser.
@@ -14,33 +14,10 @@ import org.apache.commons.lang.StringUtils
  */
 class ArticleParser {
 
-  val processorsForAutoMode = new Processors <~ List(
-    //Step1: Remove hidden element , clean document.
-    new DocumentCleaner,
-    new LanguageDetector,
-    new RemoveHiddenElement,
-    new RemoveDirtyElementFilter,
-    //Step2: Extract article elements.
-    new ArticleExtractor,
-    new TitleExtractor,
-    //Step3: Try to find potential element.
-    new TitleBaseFilter,
-    new NumbOfWordFilter,
-    new TagBaseFilter,
-    new MediaBaseFilter,
-    new DistanceBaseFilter,
-    //Step4: Remove bad quality element.
-    new DirtyImageFilter,
-    new HighLinkDensityFilter,
-    new CommonElementFilter,
-    //Step5: Only keep high score elements.
-    new HighestScoreElementFilter,
-    new ContainerElementDetector,
-    new ExpandTitleToContentFilter,
-    //Step 6: Fixed broken link
-    new BrokenLinkFixed,
-    new StyleCleaner,
-    new DuplicateCleaner
+  //The order of processor is very important, the parser only using the first match controller
+  val controllers = List(
+    new YoutubeController,
+    new AutoModeController
   )
 
   /**
@@ -48,11 +25,7 @@ class ArticleParser {
    * @param doc
    * @return
    */
-  def parse(doc: Document) = {
-    val article = new Article(doc.normalise())
-    processorsForAutoMode.process(article)
-    article
-  }
+  def parse(doc: Document): Article = parse(doc, "")
 
   /**
    * Parse a html document with special title to an article
@@ -61,9 +34,9 @@ class ArticleParser {
    * @return
    */
   def parse(doc: Document, title: String) = {
-    val article = new Article(doc.normalise())
+    implicit val article = new Article(doc.normalise())
     if (StringUtils.isNotBlank(title)) article.title = title
-    processorsForAutoMode.process(article)
+    controllers.find(_.isRight).map(_.process)
     article
   }
 
